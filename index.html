@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SET</title>
+    <script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <style type="text/css">
+        @font-face {
+            font-family: 'icomoon';
+            src: url('css/fonts/icomoon.eot?v00024');
+            src: 
+                url('css/fonts/icomoon.eot?#iefixv00024') format('embedded-opentype'), 
+                url('css/fonts/icomoon.woff?v00024') format('woff'), 
+                url('css/fonts/icomoon.ttf?v00024') format('truetype'), 
+                url('css/fonts/icomoon.svg?v00024#icomoon') format('svg');
+            font-weight: normal;
+            font-style: normal;
+        }
+        i {
+            font-family: 'icomoon';
+            font-style: normal;
+            font-weight: normal;
+            font-variant: normal;
+            text-transform: none;
+            line-height: 1;
+            -webkit-text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-text-rendering: optimizeLegibility;
+            -moz-font-smoothing: antialiased;
+            -ms-text-rendering: optimizeLegibility;
+            -ms-font-smoothing: antialiased;
+            -o-text-rendering: optimizeLegibility;
+            -o-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+            /*font-smoothing: antialiased;*/
+            margin: 0 1px;
+        }
+        #box { text-align: center; }
+        #box #time { height: 1em; }
+        #box #tableBoard { position: absolute; width: 746px; left: 50%; margin-left: -373px; top: 50vh; margin-top: -124px; }
+        #box #tableBoard > div { width: 180px; height: 80px; line-height: 85px; border: 1px solid #ccc; text-align: center; font-size: 40px; cursor: pointer; margin: 2px; float: left; }
+        #box #tableBoard > div.lock { background: #ccc; }
+        #box #tableBoard.ans > div.lock { border-color: #707070; }
+
+        .slash { background-image: url(image/Slash.png); }
+        .red { color: #c90202; }
+        .green { color: #1b6206; }
+        .blue { color: #001eca; }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <h4 id="time"></h4>
+        <button type="button" id="hint">提示or無解答</button>
+        <div id="tableBoard"></div>
+    </div>
+</body>
+</html>
