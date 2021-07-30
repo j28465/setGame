@@ -41,7 +41,7 @@ $(function () {
             //選擇第二或三張牌
             let card: String = hint.pop();
             clickAry.push(card);
-            $("#tableBoard").find("div[data-ary='"+ card +"']")[0].className = "lock";
+            $("#tableBoard").find("div[data-ary='"+ card +"']").addClass("lock");
             //第三張牌的話，清空、(發牌)、解除反灰
             if(hint.length == 0) distribute();
         }
@@ -73,7 +73,7 @@ $(function () {
                 //選擇第一張牌
                 let card: String = hint.pop();
                 clickAry.push(card);
-                $("#tableBoard").find("div[data-ary='"+ card +"']")[0].className = "lock";
+                $("#tableBoard").find("div[data-ary='"+ card +"']").addClass("lock");
             }
             else    
             {
@@ -95,11 +95,11 @@ $(function () {
         target = this;
         if (target.className == "lock") {
             removeArray(clickAry, target.getAttribute("data-ary"));
-            target.className = "";
+            $(target).removeClass("lock");
         }
         else {
             clickAry.push(target.getAttribute("data-ary"));
-            target.className = "lock";
+            $(target).addClass("lock");
             if (clickAry.length == 3) {
                 //檢查所選牌組是否符合
                 jdg = verify(clickAry);
@@ -116,9 +116,14 @@ function distributeNew (j: number): void
 {
     for(let i: number = 0; i < j; ++i)
     {
+        //圖案+邊框
         let target = document.createElement("div");
         produce(target);
-        $("#tableBoard").append(target);
+        //牌
+        let card = document.createElement("div");
+        card.className = "col-3 p-0 fs-1";
+        card.appendChild(target);
+        $("#tableBoard").append(card);
     }
 }
 //補牌
