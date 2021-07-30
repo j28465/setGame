@@ -41,7 +41,7 @@ $(function () {
             //選擇第二或三張牌
             let card: String = hint.pop();
             clickAry.push(card);
-            $("#tableBoard").find("div[data-ary='"+ card +"']")[0].className = "lock";
+            $("#tableBoard").find("div[data-ary='"+ card +"']").addClass("lock");
             //第三張牌的話，清空、(發牌)、解除反灰
             if(hint.length == 0) distribute();
         }
@@ -73,7 +73,7 @@ $(function () {
                 //選擇第一張牌
                 let card: String = hint.pop();
                 clickAry.push(card);
-                $("#tableBoard").find("div[data-ary='"+ card +"']")[0].className = "lock";
+                $("#tableBoard").find("div[data-ary='"+ card +"']").addClass("lock");
             }
             else    
             {
@@ -89,17 +89,18 @@ $(function () {
             }
         }
         //解除頁面鎖定
-        setTimeout(function () {  $("#box").removeClass("lock"); }, 800);
+        //setTimeout(function () {  $("#box").removeClass("lock"); }, 800);
+        $("#box").removeClass("lock");
     }).on("click", "#tableBoard > div", function(){
         $("#box").addClass("lock");
         target = this;
         if (target.className == "lock") {
             removeArray(clickAry, target.getAttribute("data-ary"));
-            target.className = "";
+            $(target).removeClass("lock");
         }
         else {
             clickAry.push(target.getAttribute("data-ary"));
-            target.className = "lock";
+            $(target).addClass("lock");
             if (clickAry.length == 3) {
                 //檢查所選牌組是否符合
                 jdg = verify(clickAry);
@@ -108,7 +109,8 @@ $(function () {
             }
         }
         //解除頁面鎖定
-        setTimeout(function () { $("#box").removeClass("lock"); }, 800);
+        //setTimeout(function () { $("#box").removeClass("lock"); }, 800);
+        $("#box").removeClass("lock");
     });
 });
 //發牌
@@ -116,9 +118,14 @@ function distributeNew (j: number): void
 {
     for(let i: number = 0; i < j; ++i)
     {
+        //圖案+邊框
         let target = document.createElement("div");
         produce(target);
-        $("#tableBoard").append(target);
+        //牌
+        let card = document.createElement("div");
+        card.className = "col-3 p-0 fs-1";
+        card.appendChild(target);
+        $("#tableBoard").append(card);
     }
 }
 //補牌
@@ -129,7 +136,7 @@ function distribute (jdg: Boolean = true): void
     //答對
     if (jdg) 
     {        
-        setTimeout(function () {  
+        //setTimeout(function () {  
             $("#tableBoard").addClass("ans").find("div.lock").each(function (i, e) {
                 if(tableCards.length > 12)
                 {
@@ -153,13 +160,14 @@ function distribute (jdg: Boolean = true): void
             }); 
             //解除反灰
             $("#tableBoard").removeClass("ans").find("div.lock").removeClass("lock");
-        }, 500);
+        //}, 500);
     }
     else
     {
         //解除反灰   
-        setTimeout(function () { $("#tableBoard").find("div.lock").removeClass("lock"); }, 300);
-        alert("答錯ㄌ");
+        //setTimeout(function () { $("#tableBoard").find("div.lock").removeClass("lock"); }, 300);
+        $("#tableBoard").find("div.lock").removeClass("lock");
+        //alert("答錯ㄌ");
     }
 }
 //隨機排序
@@ -194,15 +202,12 @@ function produce(target: any): void
     //形狀, 填充
     var htm = document.createElement("i");
     switch(p[0]) {
-        case 1: //circle
-            htm.innerHTML = "&#xa00"+p[2]; 
-            break;
-        case 2: //square
-            htm.innerHTML = "&#xb00"+p[2]; 
-            break;
-        case 3: //star
-            htm.innerHTML = "&#xc00"+p[2]; 
-            break;
+        //circle
+        case 1: htm.innerHTML = "&#xa00"+p[2]; break;
+        //square
+        case 2: htm.innerHTML = "&#xb00"+p[2]; break;
+        //star
+        case 3: htm.innerHTML = "&#xc00"+p[2]; break;
     }
     //顏色
     switch (p[1]) {
