@@ -152,7 +152,9 @@ function distribute(jdg) {
     else {
         //解除反灰   
         setTimeout(function () { $("#tableBoard").find("div.lock").removeClass("lock"); }, 300);
-        alert("答錯ㄌ");
+        setTimeout(function () {
+            alert("答錯ㄌ");
+        }, 0);
     }
 }
 //隨機排序
