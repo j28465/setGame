@@ -113,7 +113,7 @@ function distributeNew(j) {
         produce(target);
         //牌
         var card = document.createElement("div");
-        card.className = "col-3 p-0 fs-1";
+        //card.className = "col-3 p-0 fs-1";
         card.appendChild(target);
         $("#tableBoard").append(card);
     }

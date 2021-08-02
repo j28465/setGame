@@ -122,7 +122,7 @@ function distributeNew (j: number): void
         produce(target);
         //牌
         let card = document.createElement("div");
-        card.className = "col-3 p-0 fs-1";
+        //card.className = "col-3 p-0 fs-1";
         card.appendChild(target);
         $("#tableBoard").append(card);
     }
