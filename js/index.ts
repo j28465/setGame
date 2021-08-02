@@ -119,11 +119,10 @@ function distributeNew (j: number): void
     {
         //圖案+邊框
         let target = document.createElement("div");
-        produce(target);
         //牌
         let card = document.createElement("div");
-        //card.className = "col-3 p-0 fs-1";
         card.appendChild(target);
+        produce(card);
         $("#tableBoard").append(card);
     }
 }
@@ -148,8 +147,9 @@ function distribute (jdg: Boolean = true): void
                     //清除現在檯面上被選走的牌
                     removeArray(tableCards, e.getAttribute("data-ary"));
                     //清除被選走的牌
-                    e.innerHTML = "";
                     e.setAttribute("data-ary", "");
+                    e.firstElementChild.innerHTML = "";
+                    //console.log(e);
                     //放上新的牌
                     if(cards.length > 0) 
                         produce(e);
@@ -215,9 +215,11 @@ function produce(target: any): void
     }
     //數量
     for (var i = 0; i < p[3]; ++i) {
-        target.appendChild(htm.cloneNode(true));
+        target.setAttribute("data-ary", p);
+        target.firstChild.appendChild(htm.cloneNode(true));
     }
-    target.setAttribute("data-ary", p);
+    //target.setAttribute("data-ary", p);   
+    //target.parentNode.setAttribute("data-ary", p);
 }
 //檢查所選牌組是否符合
 function verify(ary: String[]): Boolean
