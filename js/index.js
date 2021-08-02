@@ -154,7 +154,7 @@ function distribute(jdg) {
         //解除反灰   
         //setTimeout(function () { $("#tableBoard").find("div.lock").removeClass("lock"); }, 300);
         $("#tableBoard").find("div.lock").removeClass("lock");
-        //alert("答錯ㄌ");
+        alert("答錯ㄌ！");
     }
 }
 //隨機排序
