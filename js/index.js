@@ -21,7 +21,7 @@ $(function () {
     for (var a = 1; a <= 3; ++a) {
         for (var b = 1; b <= 3; ++b) {
             for (var c = 1; c <= 3; ++c) {
-                for (var d = 1; d <= 1; ++d) {
+                for (var d = 1; d <= 3; ++d) {
                     cards.push([a, b, c, d]);
                 }
             }
@@ -151,7 +151,7 @@ function distribute(jdg) {
     else {
         //解除反灰   
         setTimeout(function () { $("#tableBoard").find("div.lock").removeClass("lock"); }, 300);
-        alert("答錯ㄌ!!");
+        alert("答錯ㄌ");
     }
 }
 //隨機排序
