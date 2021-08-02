@@ -84,7 +84,7 @@ $(function () {
         }
         //解除頁面鎖定
         setTimeout(function () { $("#box").removeClass("lock"); }, 800);
-    }).on("click", "#tableBoard > div", function () {
+    }).on("click touchstart", "#tableBoard > div", function () {
         $("#box").addClass("lock");
         target = this;
         if (target.className == "lock") {
