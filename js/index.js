@@ -21,7 +21,7 @@ $(function () {
     for (var a = 1; a <= 3; ++a) {
         for (var b = 1; b <= 3; ++b) {
             for (var c = 1; c <= 3; ++c) {
-                for (var d = 1; d <= 3; ++d) {
+                for (var d = 1; d <= 1; ++d) {
                     cards.push([a, b, c, d]);
                 }
             }

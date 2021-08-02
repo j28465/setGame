@@ -22,7 +22,7 @@ $(function () {
     for (let a:number = 1; a <= 3; ++a) {
         for (let b:number = 1; b <= 3; ++b) {
             for (let c:number = 1; c <= 3; ++c) {
-                for (let d:number = 1; d <= 3; ++d) {
+                for (let d:number = 1; d <= 1; ++d) {
                     cards.push([a, b, c, d]);
                 }
             }
