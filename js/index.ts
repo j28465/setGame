@@ -34,7 +34,7 @@ $(function () {
     //發牌
     distributeNew(12);
     
-    $("#box:not(.lock)").on("click touchstart", "#hint", function(){
+    $("#box:not(.lock)").on("click", "#hint", function(){
         $("#box").addClass("lock");
         //提示or無解答
         if(hint.length > 0)
@@ -91,7 +91,7 @@ $(function () {
         }
         //解除頁面鎖定
         setTimeout(function () {  $("#box").removeClass("lock"); }, 800);
-    }).on("click touchstart", "#tableBoard > div", function(){
+    }).on("click", "#tableBoard > div", function(){
         $("#box").addClass("lock");
         target = this;
         if (target.className == "lock") {
