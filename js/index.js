@@ -82,8 +82,7 @@ $(function () {
             }
         }
         //解除頁面鎖定
-        //setTimeout(function () {  $("#box").removeClass("lock"); }, 800);
-        $("#box").removeClass("lock");
+        setTimeout(function () { $("#box").removeClass("lock"); }, 800);
     }).on("click", "#tableBoard > div", function () {
         $("#box").addClass("lock");
         target = this;
@@ -102,8 +101,7 @@ $(function () {
             }
         }
         //解除頁面鎖定
-        //setTimeout(function () { $("#box").removeClass("lock"); }, 800);
-        $("#box").removeClass("lock");
+        setTimeout(function () { $("#box").removeClass("lock"); }, 800);
     });
 });
 //發牌
@@ -126,34 +124,33 @@ function distribute(jdg) {
     clickAry = [];
     //答對
     if (jdg) {
-        //setTimeout(function () {  
-        $("#tableBoard").addClass("ans").find("div.lock").each(function (i, e) {
-            if (tableCards.length > 12) {
-                //清除現在檯面上被選走的牌
-                removeArray(tableCards, e.getAttribute("data-ary"));
-                e.remove();
-            }
-            else {
-                //清除現在檯面上被選走的牌
-                removeArray(tableCards, e.getAttribute("data-ary"));
-                //清除被選走的牌
-                e.innerHTML = "";
-                e.setAttribute("data-ary", "");
-                //放上新的牌
-                if (cards.length > 0)
-                    produce(e);
-                else if (tableCards.length == 0)
-                    alert("遊戲結束");
-            }
-        });
-        //解除反灰
-        $("#tableBoard").removeClass("ans").find("div.lock").removeClass("lock");
-        //}, 500);
+        setTimeout(function () {
+            $("#tableBoard").addClass("ans").find("div.lock").each(function (i, e) {
+                if (tableCards.length > 12) {
+                    //清除現在檯面上被選走的牌
+                    removeArray(tableCards, e.getAttribute("data-ary"));
+                    e.remove();
+                }
+                else {
+                    //清除現在檯面上被選走的牌
+                    removeArray(tableCards, e.getAttribute("data-ary"));
+                    //清除被選走的牌
+                    e.innerHTML = "";
+                    e.setAttribute("data-ary", "");
+                    //放上新的牌
+                    if (cards.length > 0)
+                        produce(e);
+                    else if (tableCards.length == 0)
+                        alert("遊戲結束");
+                }
+            });
+            //解除反灰
+            $("#tableBoard").removeClass("ans").find("div.lock").removeClass("lock");
+        }, 500);
     }
     else {
         //解除反灰   
-        //setTimeout(function () { $("#tableBoard").find("div.lock").removeClass("lock"); }, 300);
-        $("#tableBoard").find("div.lock").removeClass("lock");
+        setTimeout(function () { $("#tableBoard").find("div.lock").removeClass("lock"); }, 300);
         alert("答錯ㄌ！");
     }
 }

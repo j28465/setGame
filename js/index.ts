@@ -89,8 +89,7 @@ $(function () {
             }
         }
         //解除頁面鎖定
-        //setTimeout(function () {  $("#box").removeClass("lock"); }, 800);
-        $("#box").removeClass("lock");
+        setTimeout(function () {  $("#box").removeClass("lock"); }, 800);
     }).on("click", "#tableBoard > div", function(){
         $("#box").addClass("lock");
         target = this;
@@ -109,8 +108,7 @@ $(function () {
             }
         }
         //解除頁面鎖定
-        //setTimeout(function () { $("#box").removeClass("lock"); }, 800);
-        $("#box").removeClass("lock");
+        setTimeout(function () { $("#box").removeClass("lock"); }, 800);
     });
 });
 //發牌
@@ -136,7 +134,7 @@ function distribute (jdg: Boolean = true): void
     //答對
     if (jdg) 
     {        
-        //setTimeout(function () {  
+        setTimeout(function () {  
             $("#tableBoard").addClass("ans").find("div.lock").each(function (i, e) {
                 if(tableCards.length > 12)
                 {
@@ -160,13 +158,12 @@ function distribute (jdg: Boolean = true): void
             }); 
             //解除反灰
             $("#tableBoard").removeClass("ans").find("div.lock").removeClass("lock");
-        //}, 500);
+        }, 500);
     }
     else
     {
         //解除反灰   
-        //setTimeout(function () { $("#tableBoard").find("div.lock").removeClass("lock"); }, 300);
-        $("#tableBoard").find("div.lock").removeClass("lock");
+        setTimeout(function () { $("#tableBoard").find("div.lock").removeClass("lock"); }, 300);
         alert("答錯ㄌ！");
     }
 }
