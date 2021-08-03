@@ -91,7 +91,7 @@ $(function () {
         }
         //解除頁面鎖定
         setTimeout(function () {  $("#box").removeClass("lock"); }, 800);
-    }).on("touchend", "#tableBoard > div", function(){
+    }).on("touchend, click", "#tableBoard > div", function(){
         $("#box").addClass("lock");
         target = this;
         if (target.className == "lock") {
@@ -192,6 +192,7 @@ function removeArray(array: String[], _target: String): void
 //產生icon font並放入
 function produce(target: any): void 
 {
+    target.style = "";
     //這次要產生的牌的資料
     let p: number[] = cards.pop();
     //紀錄現在檯面上的牌
@@ -201,11 +202,11 @@ function produce(target: any): void
     var htm = document.createElement("i");
     switch(p[0]) {
         //circle
-        case 1: htm.innerHTML = "&#xa00"+p[2]; break;
+        case 1: htm.innerHTML = "&#xa00"+p[2]; target.style.transform = "rotate(180deg)"; break;
         //square
         case 2: htm.innerHTML = "&#xb00"+p[2]; break;
         //star
-        case 3: htm.innerHTML = "&#xc00"+p[2]; break;
+        case 3: htm.innerHTML = "&#xc00"+p[2]; htm.style.fontWeight = "bolder"; break;
     }
     //顏色
     switch (p[1]) {

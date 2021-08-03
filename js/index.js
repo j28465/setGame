@@ -84,7 +84,7 @@ $(function () {
         }
         //解除頁面鎖定
         setTimeout(function () { $("#box").removeClass("lock"); }, 800);
-    }).on("touchend", "#tableBoard > div", function () {
+    }).on("touchend, click", "#tableBoard > div", function () {
         $("#box").addClass("lock");
         target = this;
         if (target.className == "lock") {
@@ -175,6 +175,7 @@ function removeArray(array, _target) {
 }
 //產生icon font並放入
 function produce(target) {
+    target.style = "";
     //這次要產生的牌的資料
     var p = cards.pop();
     //紀錄現在檯面上的牌
@@ -186,6 +187,7 @@ function produce(target) {
         //circle
         case 1:
             htm.innerHTML = "&#xa00" + p[2];
+            target.style.transform = "rotate(180deg)";
             break;
         //square
         case 2:
@@ -194,6 +196,7 @@ function produce(target) {
         //star
         case 3:
             htm.innerHTML = "&#xc00" + p[2];
+            htm.style.fontWeight = "bolder";
             break;
     }
     //顏色
