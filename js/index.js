@@ -31,7 +31,7 @@ $(function () {
     shuffle(cards);
     //發牌
     distributeNew(12);
-    $("#box:not(.lock)").on("click", "#hint", function () {
+    $("#box:not(.lock)").on("touchend", "#hint", function () {
         $("#box").addClass("lock");
         //提示or無解答
         if (hint.length > 0) {
@@ -84,7 +84,7 @@ $(function () {
         }
         //解除頁面鎖定
         setTimeout(function () { $("#box").removeClass("lock"); }, 800);
-    }).on("click", "#tableBoard > div", function () {
+    }).on("touchend", "#tableBoard > div", function () {
         $("#box").addClass("lock");
         target = this;
         if (target.className == "lock") {
@@ -152,9 +152,7 @@ function distribute(jdg) {
     else {
         //解除反灰   
         setTimeout(function () { $("#tableBoard").find("div.lock").removeClass("lock"); }, 300);
-        setTimeout(function () {
-            alert("答錯ㄌ");
-        }, 0);
+        alert("答錯ㄌ");
     }
 }
 //隨機排序
