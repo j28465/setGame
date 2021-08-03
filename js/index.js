@@ -31,7 +31,7 @@ $(function () {
     shuffle(cards);
     //發牌
     distributeNew(12);
-    $("#box:not(.lock)").on("touchend", "#hint", function () {
+    $("#box:not(.lock)").on("touchend, click", "#hint", function () {
         $("#box").addClass("lock");
         //提示or無解答
         if (hint.length > 0) {
