@@ -33,7 +33,7 @@ $(function () {
     //發牌
     distributeNew(12);
     
-    $("#box:not(.lock)").on("click", "#hint", function(){
+    $("#box:not(.lock)").on("touchend, click", "#hint", function(){
         $("#box").addClass("lock");
         //提示or無解答
         if(hint.length > 0)
@@ -90,7 +90,7 @@ $(function () {
         }
         //解除頁面鎖定
         setTimeout(function () {  $("#box").removeClass("lock"); }, 800);
-    }).on("click", "#tableBoard > div", function(){
+    }).on("touchend, click", "#tableBoard > div", function(){
         $("#box").addClass("lock");
         target = this;
         if (target.className == "lock") {
@@ -118,11 +118,10 @@ function distributeNew (j: number): void
     {
         //圖案+邊框
         let target = document.createElement("div");
-        produce(target);
         //牌
         let card = document.createElement("div");
-        card.className = "col-3 p-0 fs-1";
         card.appendChild(target);
+        produce(card);
         $("#tableBoard").append(card);
     }
 }
@@ -147,8 +146,9 @@ function distribute (jdg: Boolean = true): void
                     //清除現在檯面上被選走的牌
                     removeArray(tableCards, e.getAttribute("data-ary"));
                     //清除被選走的牌
-                    e.innerHTML = "";
                     e.setAttribute("data-ary", "");
+                    e.firstElementChild.innerHTML = "";
+                    //console.log(e);
                     //放上新的牌
                     if(cards.length > 0) 
                         produce(e);
@@ -191,6 +191,7 @@ function removeArray(array: String[], _target: String): void
 //產生icon font並放入
 function produce(target: any): void 
 {
+    target.style = "";
     //這次要產生的牌的資料
     let p: number[] = cards.pop();
     //紀錄現在檯面上的牌
@@ -199,15 +200,12 @@ function produce(target: any): void
     //形狀, 填充
     var htm = document.createElement("i");
     switch(p[0]) {
-        case 1: //circle
-            htm.innerHTML = "&#xa00"+p[2]; 
-            break;
-        case 2: //square
-            htm.innerHTML = "&#xb00"+p[2]; 
-            break;
-        case 3: //star
-            htm.innerHTML = "&#xc00"+p[2]; 
-            break;
+        //circle
+        case 1: htm.innerHTML = "&#xa00"+p[2]; target.style.transform = "rotate(180deg)"; break;
+        //square
+        case 2: htm.innerHTML = "&#xb00"+p[2]; break;
+        //star
+        case 3: htm.innerHTML = "&#xc00"+p[2]; htm.style.fontWeight = "bolder"; break;
     }
     //顏色
     switch (p[1]) {
@@ -217,9 +215,11 @@ function produce(target: any): void
     }
     //數量
     for (var i = 0; i < p[3]; ++i) {
-        target.appendChild(htm.cloneNode(true));
+        target.setAttribute("data-ary", p);
+        target.firstChild.appendChild(htm.cloneNode(true));
     }
-    target.setAttribute("data-ary", p);
+    //target.setAttribute("data-ary", p);   
+    //target.parentNode.setAttribute("data-ary", p);
 }
 //檢查所選牌組是否符合
 function verify(ary: String[]): Boolean
