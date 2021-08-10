@@ -1,3 +1,4 @@
+//版本：v1
 //海底的牌
 var cards = [];
 //桌面上的牌
@@ -30,7 +31,7 @@ $(function () {
     shuffle(cards);
     //發牌
     distributeNew(12);
-    $("#box:not(.lock)").on("click", "#hint", function () {
+    $("#box:not(.lock)").on("touchend, click", "#hint", function () {
         $("#box").addClass("lock");
         //提示or無解答
         if (hint.length > 0) {
@@ -83,7 +84,7 @@ $(function () {
         }
         //解除頁面鎖定
         setTimeout(function () { $("#box").removeClass("lock"); }, 800);
-    }).on("click", "#tableBoard > div", function () {
+    }).on("touchend, click", "#tableBoard > div", function () {
         $("#box").addClass("lock");
         target = this;
         if (target.className == "lock") {
@@ -109,11 +110,10 @@ function distributeNew(j) {
     for (var i = 0; i < j; ++i) {
         //圖案+邊框
         var target = document.createElement("div");
-        produce(target);
         //牌
         var card = document.createElement("div");
-        card.className = "col-3 p-0 fs-1";
         card.appendChild(target);
+        produce(card);
         $("#tableBoard").append(card);
     }
 }
@@ -135,8 +135,9 @@ function distribute(jdg) {
                     //清除現在檯面上被選走的牌
                     removeArray(tableCards, e.getAttribute("data-ary"));
                     //清除被選走的牌
-                    e.innerHTML = "";
                     e.setAttribute("data-ary", "");
+                    e.firstElementChild.innerHTML = "";
+                    //console.log(e);
                     //放上新的牌
                     if (cards.length > 0)
                         produce(e);
@@ -174,6 +175,7 @@ function removeArray(array, _target) {
 }
 //產生icon font並放入
 function produce(target) {
+    target.style = "";
     //這次要產生的牌的資料
     var p = cards.pop();
     //紀錄現在檯面上的牌
@@ -182,14 +184,19 @@ function produce(target) {
     //形狀, 填充
     var htm = document.createElement("i");
     switch (p[0]) {
-        case 1: //circle
+        //circle
+        case 1:
             htm.innerHTML = "&#xa00" + p[2];
+            target.style.transform = "rotate(180deg)";
             break;
-        case 2: //square
+        //square
+        case 2:
             htm.innerHTML = "&#xb00" + p[2];
             break;
-        case 3: //star
+        //star
+        case 3:
             htm.innerHTML = "&#xc00" + p[2];
+            htm.style.fontWeight = "bolder";
             break;
     }
     //顏色
@@ -206,9 +213,11 @@ function produce(target) {
     }
     //數量
     for (var i = 0; i < p[3]; ++i) {
-        target.appendChild(htm.cloneNode(true));
+        target.setAttribute("data-ary", p);
+        target.firstChild.appendChild(htm.cloneNode(true));
     }
-    target.setAttribute("data-ary", p);
+    //target.setAttribute("data-ary", p);   
+    //target.parentNode.setAttribute("data-ary", p);
 }
 //檢查所選牌組是否符合
 function verify(ary) {
